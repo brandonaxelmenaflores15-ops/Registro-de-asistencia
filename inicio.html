@@ -1,0 +1,105 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Registro de Asistencia</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f4ec;
+    margin:0;
+}
+header{
+    background:#0b6b3a;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+table{
+    width:90%;
+    margin:20px auto;
+    background:white;
+    border-collapse:collapse;
+}
+th, td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+th{
+    background:#2e8b57;
+    color:white;
+}
+.ok{ color:green; font-size:22px; }
+.no{ color:red; font-size:22px; }
+
+.btn{
+    background:#2e8b57;
+    color:white;
+    padding:10px 18px;
+    margin:5px;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+    display:inline-block;
+}
+.btn:hover{ background:#0b6b3a; }
+
+.btn-eliminar{
+    background:#c0392b;
+    color:white;
+    padding:6px 10px;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:14px;
+}
+.btn-eliminar:hover{
+    background:#922b21;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Registro de Asistencia - CECyTEM</h1>
+    <a href="{% url 'agregar' %}" class="btn">➕ Ingresar alumno</a>
+    <a href="{% url 'asistencia' %}" class="btn">📝 Registrar asistencia</a>
+</header>
+
+<table>
+    <tr>
+        <th># Lista</th>
+        <th>Nombre</th>
+        <th>Grupo</th>
+        <th>Asistencia</th>
+        <th>Acción</th>
+    </tr>
+
+    {% for alumno in alumnos %}
+    <tr>
+        <td>{{ alumno.numero_lista }}</td>
+        <td>{{ alumno.nombre }}</td>
+        <td>{{ alumno.grupo }}</td>
+        <td>
+            {% if asistencia|get_item:alumno.id %}
+                <span class="ok">✔️</span>
+            {% else %}
+                <span class="no">❌</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'eliminar' alumno.id %}"
+               class="btn-eliminar"
+               onclick="return confirm('¿Seguro que deseas eliminar este alumno?')">
+               🗑 Eliminar
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

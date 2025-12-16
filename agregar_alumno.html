@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agregar Alumno</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f4ec;
+    margin:0;
+}
+header{
+    background:#0b6b3a;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+form{
+    background:white;
+    width:320px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:8px;
+}
+button{
+    background:#2e8b57;
+    color:white;
+    border:none;
+    padding:10px;
+    width:100%;
+    border-radius:5px;
+    font-weight:bold;
+}
+button:hover{
+    background:#0b6b3a;
+}
+a{
+    display:block;
+    text-align:center;
+    margin-top:10px;
+    color:#0b6b3a;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Ingresar Alumno</h1>
+</header>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Alumno</button>
+    <a href="{% url 'inicio' %}">Volver</a>
+</form>
+
+</body>
+</html>
